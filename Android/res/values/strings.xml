@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Rubix</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="msg_ble_not_supported">Bluetooth LE not supported by this device</string>
+    <string name="msg_bluetooth_not_available">Bluetooth not available</string>
+    
+    <string name="searching">Searching</string>
+    <string name="search_for_devices">Search For Devices</string>
+    <string name="settings">Settings</string>
+    <string name="signal_strength">Signal Strength:</string>
+    <string name="statistics">Statistics</string>
+
+</resources>

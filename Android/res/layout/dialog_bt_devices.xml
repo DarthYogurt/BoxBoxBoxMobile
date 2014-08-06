@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="260dp"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_whitebg_rad" >
+    
+    <ListView
+	    android:id="@+id/list_devices"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="1"
+	    android:divider="@null" />
+    
+    <RelativeLayout
+        android:id="@+id/btn_search_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/selector_btn_search_devices" >
+        
+        <ProgressBar
+	        android:id="@+id/spinner"
+	        android:layout_width="22dp"
+	        android:layout_height="22dp"
+	        android:layout_alignParentLeft="true"
+	        android:layout_centerVertical="true"
+	        style="?android:attr/android:progressBarStyleSmall"
+	        android:visibility="gone" />
+        
+        <TextView
+            android:id="@+id/btn_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerInParent="true"
+	        android:textSize="16sp"
+	        android:textStyle="bold"
+	        android:text="@string/search_for_devices" />   
+        
+    </RelativeLayout>
+    
+</LinearLayout>
+
