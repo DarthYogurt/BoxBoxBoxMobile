@@ -183,18 +183,21 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 			}
 		}
 	}
+	
+	public void connectToDevice(Device device) {
+		if (mService != null) {
+			mService.connectDevice(device.getAddress(), true);
+		}
+	}
 
 	@Override
 	public void onDeviceFound(String deviceAddress, String name, int rssi, int bondState, byte[] scanRecord, ParcelUuid[] uuids) {
 		Log.v("Device Found", name + " " + deviceAddress);
 		Device device = new Device(name, deviceAddress, bondState, rssi, scanRecord, uuids);
 		mDevices.add(device);
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				
-			}
-		});
+		if (mBtDevicesDialog != null) {
+			mBtDevicesDialog.updatedList(mDevices);
+		}
 	}
 
 	@Override

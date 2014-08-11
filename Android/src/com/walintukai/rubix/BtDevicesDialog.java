@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -58,7 +59,7 @@ public class BtDevicesDialog extends DialogFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				dismiss();
-				mBtDevicesDialogListener.connectToDevice(mDevices.get(position));
+				((MainActivity) getActivity()).connectToDevice(mDevices.get(position));
 			}
 		});
 		
@@ -97,6 +98,16 @@ public class BtDevicesDialog extends DialogFragment {
 				tvBtnText.setText(R.string.search_for_devices);
 			}
 		});
+	}
+	
+	public void updatedList(final List<Device> devices) {
+		mDevices = devices;
+		getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				mAdapter.updateList(devices);
+			}
+		});	
 	}
 	
 }

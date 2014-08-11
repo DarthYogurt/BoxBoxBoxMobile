@@ -70,4 +70,10 @@ public class BtDevicesAdapter extends BaseAdapter {
         return convertView;
 	}
 
+	public void updateList(List<Device> updated) { 
+		mDevices.clear();
+		mDevices.addAll(updated);
+		this.notifyDataSetChanged();
+	}
+	
 }
