@@ -34,7 +34,7 @@ public class UnlockFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.current_box:
-			((MainActivity) getActivity()).showBluetoothDevicesDialog();
+			((MainActivity) getActivity()).enableBluetooth();
 			break;
 		}
 	}

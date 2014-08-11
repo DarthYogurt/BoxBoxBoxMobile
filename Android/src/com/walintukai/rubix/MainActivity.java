@@ -109,7 +109,7 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 		else return true;
 	}
 	
-	private void requestToEnableBluetooth() {
+	public void enableBluetooth() {
 		if (hasBLESupport()) {
 			mBtAdapter = BluetoothAdapter.getDefaultAdapter();
 			if (mBtAdapter != null) {
@@ -165,7 +165,7 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 				new Thread() {
 					@Override
 					public void run() {
-						if (mBtDevicesDialog != null && mBtDevicesDialog.isVisible()) {
+						if (mBtDevicesDialog != null) {
 							Log.e("devices dialog", "searching");
 							mBtDevicesDialog.onSearchingStarted();
 							mService.startScanDevice();
@@ -186,7 +186,7 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 
 	@Override
 	public void onDeviceFound(String deviceAddress, String name, int rssi, int bondState, byte[] scanRecord, ParcelUuid[] uuids) {
-		Log.v("Device Found", name + " "+ deviceAddress);
+		Log.v("Device Found", name + " " + deviceAddress);
 		Device device = new Device(name, deviceAddress, bondState, rssi, scanRecord, uuids);
 		mDevices.add(device);
 		runOnUiThread(new Runnable() {
