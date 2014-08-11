@@ -57,6 +57,10 @@ public class ConnectionService extends Service {
 	public void setOnServiceListener(ServiceListener serviceListener){
 	    mServiceListener = serviceListener;
 	}
+	
+	public void setListener(ConnectionEventListener mListener) {
+		connectionEventListener = mListener;
+	}
 
 	@Override
 	public void onCreate() {
@@ -81,10 +85,6 @@ public class ConnectionService extends Service {
 		mBluetoothGatt = null;
 
 		super.onDestroy();
-	}
-	
-	public void setListener(ConnectionEventListener mListener) {
-		connectionEventListener = mListener;
 	}
 
 	public void startScanDevice() {

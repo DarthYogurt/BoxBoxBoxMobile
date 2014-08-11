@@ -38,13 +38,7 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 	private Fragment mViewPagerFragment;
 
 	ServiceConnection mConnection = new ServiceConnection() {
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-			Log.i("ConnectionService", "Disconnected");
-			mService = null;
-		}
-
+		
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			LocalBinder binder = (LocalBinder) service;
@@ -53,7 +47,14 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 			if (service != null) {
 				Log.i("ConnectionService", "Connected");
 				mService.setListener(MainActivity.this);
+				mService.setOnServiceListener(MainActivity.this);
 			}
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			Log.i("ConnectionService", "Disconnected");
+			mService = null;
 		}
 	};
 	
@@ -226,6 +227,7 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 
 	@Override
 	public void onConnectedToDevice(final BluetoothDevice device) {
+		Log.e("onConnectedToDevice", "triggered");
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
