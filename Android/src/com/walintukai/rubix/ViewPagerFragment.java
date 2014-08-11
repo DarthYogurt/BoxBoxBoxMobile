@@ -50,10 +50,10 @@ public class ViewPagerFragment extends Fragment {
 		
 		CirclePageIndicator circlePageIndicator = (CirclePageIndicator) view.findViewById(R.id.page_indicator);
 		circlePageIndicator.setViewPager(mPager, 1);
-		circlePageIndicator.setRadius(10);
-		circlePageIndicator.setStrokeWidth(3);
-		circlePageIndicator.setStrokeColor(Color.parseColor("#000000"));
-		circlePageIndicator.setFillColor(Color.parseColor("#000000"));
+		circlePageIndicator.setRadius(8);
+		circlePageIndicator.setStrokeWidth(2);
+		circlePageIndicator.setStrokeColor(Color.parseColor("#ffffff"));
+		circlePageIndicator.setFillColor(Color.parseColor("#ffffff"));
 		circlePageIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
 			public void onPageSelected(int i) {

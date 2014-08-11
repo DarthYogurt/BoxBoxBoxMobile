@@ -15,9 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:background="#ebebeb"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp" >
+        android:background="#bf333333"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp" >
         
         <com.viewpagerindicator.CirclePageIndicator
 			android:id="@+id/page_indicator"
