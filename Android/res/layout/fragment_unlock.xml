@@ -16,8 +16,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:padding="10dp"
-        android:background="@drawable/bg_whitebg_grayrad"
-        android:text="Deric's Box" />
+        android:background="@drawable/bg_whitebg_grayrad" />
     
     <Button
         android:id="@+id/btn_unlock"

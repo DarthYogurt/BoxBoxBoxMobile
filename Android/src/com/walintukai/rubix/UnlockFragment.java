@@ -1,5 +1,6 @@
 package com.walintukai.rubix;
 
+import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class UnlockFragment extends Fragment implements OnClickListener {
+	
+	private TextView tvCurrentBox;
 	
 	static UnlockFragment newInstance() {
 		UnlockFragment fragment = new UnlockFragment();
@@ -23,9 +26,10 @@ public class UnlockFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_unlock, container, false);
-		TextView currentBox = (TextView) view.findViewById(R.id.current_box);
+		tvCurrentBox = (TextView) view.findViewById(R.id.current_box);
 		
-		currentBox.setOnClickListener(this);
+		tvCurrentBox.setOnClickListener(this);
+		tvCurrentBox.setText(R.string.select_box);
 		
 		return view;
 	}
@@ -37,6 +41,10 @@ public class UnlockFragment extends Fragment implements OnClickListener {
 			((MainActivity) getActivity()).enableBluetooth();
 			break;
 		}
+	}
+	
+	public void setCurrentBoxText(BluetoothDevice device) {
+		if (device != null && device.getName() != null) tvCurrentBox.setText(device.getName());
 	}
 	
 }

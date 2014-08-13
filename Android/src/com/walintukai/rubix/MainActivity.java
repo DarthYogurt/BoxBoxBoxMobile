@@ -29,7 +29,6 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 	
 	private static final long SCAN_TIME = 4000;
 	private static final int RC_ENABLE_BT = 100;
-	private static final int RC_BT_DEVICES_DIALOG = 200;
 	
 	public ConnectionService mService;
 	private BluetoothAdapter mBtAdapter;
@@ -167,7 +166,6 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 					@Override
 					public void run() {
 						if (mBtDevicesDialog != null) {
-							Log.e("devices dialog", "searching");
 							mBtDevicesDialog.onSearchingStarted();
 							mService.startScanDevice();
 							
@@ -177,7 +175,6 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 							mService.stopScanDevice();
 							mBtDevicesDialog.onSearchingFinished();
 						}
-						else Log.e("devices dialog", "null or not visible");
 					}
 					
 				}.start();
@@ -231,9 +228,15 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				if (device != null && device.getName() != null && device.getAddress() != null)
+				if (device != null && device.getName() != null && device.getAddress() != null) {
 					Toast.makeText(MainActivity.this, "Connected to " + device.getName() + " " + 
 							device.getAddress(), Toast.LENGTH_SHORT).show();
+					if (mViewPagerFragment != null) {
+						if (mViewPagerFragment.getClass() == UnlockFragment.class) {
+							((UnlockFragment) mViewPagerFragment).setCurrentBoxText(device);
+						}
+					}
+				}
 			}
 		});
 	}

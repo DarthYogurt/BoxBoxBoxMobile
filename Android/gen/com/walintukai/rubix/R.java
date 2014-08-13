@@ -1609,9 +1609,10 @@ containing a value of this type.
         public static final int msg_bluetooth_not_available=0x7f0b0010;
         public static final int search_for_devices=0x7f0b0012;
         public static final int searching=0x7f0b0011;
-        public static final int settings=0x7f0b0013;
-        public static final int signal_strength=0x7f0b0014;
-        public static final int statistics=0x7f0b0015;
+        public static final int select_box=0x7f0b0013;
+        public static final int settings=0x7f0b0014;
+        public static final int signal_strength=0x7f0b0015;
+        public static final int statistics=0x7f0b0016;
     }
     public static final class style {
         /** 
