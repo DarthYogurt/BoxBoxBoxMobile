@@ -33,7 +33,7 @@ public class ConnectionService extends Service {
 
 	private final IBinder mBinder = new LocalBinder();
 	private ServiceListener mServiceListener;
-	private ConnectionEventListener connectionEventListener;
+	private ConnectionEventListener mConnectionEventListener;
 	private BluetoothAdapter mBtAdapter = null;
 	public BluetoothGatt mBluetoothGatt = null;
 	HashMap<String, BluetoothDevice> mDevices = null;
@@ -59,7 +59,7 @@ public class ConnectionService extends Service {
 	}
 	
 	public void setListener(ConnectionEventListener mListener) {
-		connectionEventListener = mListener;
+		mConnectionEventListener = mListener;
 	}
 
 	@Override
@@ -195,10 +195,10 @@ public class ConnectionService extends Service {
 		public void onLeScan(final BluetoothDevice device, final int rssi, byte[] scanRecord) {
 			Log.d(TAG, "onScanResult (device : " + device.getName() + ")");
 
-			if (connectionEventListener != null) {
+			if (mConnectionEventListener != null) {
 				Log.d(TAG, "mIScanDeviceListener (device : " + device.getName() + ")");
 				addDevice(device);
-				connectionEventListener.onDeviceFound(device.getAddress(), device.getName(), rssi, 
+				mConnectionEventListener.onDeviceFound(device.getAddress(), device.getName(), rssi, 
 						device.getBondState(), scanRecord, device.getUuids());
 			}
 		}
@@ -225,8 +225,8 @@ public class ConnectionService extends Service {
 				received[i++] = integer.intValue();
 			}
 
-			if (connectionEventListener != null) {
-				connectionEventListener.onDeviceReadValue(received);
+			if (mConnectionEventListener != null) {
+				mConnectionEventListener.onDeviceReadValue(received);
 			}
 		}
 
@@ -253,8 +253,8 @@ public class ConnectionService extends Service {
 			Log.d(TAG, "onConnectionStateChange (device : " + device + ", status : " + status + " , newState :  " + newState
 					+ ")");
 
-			if (connectionEventListener != null) {
-				connectionEventListener.onDeviceConnectStateChange(device.getAddress(), newState);
+			if (mConnectionEventListener != null) {
+				mConnectionEventListener.onDeviceConnectStateChange(device.getAddress(), newState);
 			}
 
 			if (newState == BluetoothProfile.STATE_CONNECTED) {
@@ -287,8 +287,8 @@ public class ConnectionService extends Service {
 
 			Log.d(TAG, "onReadRemoteRssi (device : " + device + " , rssi :  " + rssi + " , status :  " + status + ")");
 
-			if (connectionEventListener != null) {
-				connectionEventListener.onDeviceRssiUpdate(device.getAddress(), rssi, status);
+			if (mConnectionEventListener != null) {
+				mConnectionEventListener.onDeviceRssiUpdate(device.getAddress(), rssi, status);
 			}
 
 		};
@@ -322,8 +322,8 @@ public class ConnectionService extends Service {
 
 			enableNotification(true, rxCharc);
 
-			if (connectionEventListener != null)
-				connectionEventListener.onDeviceCharacteristicFound();
+			if (mConnectionEventListener != null)
+				mConnectionEventListener.onDeviceCharacteristicFound();
 		}
 	};
 

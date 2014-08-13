@@ -36,7 +36,8 @@ public class MainActivity extends ActionBarActivity implements
 	private List<Device> mDevices;
 	private BtDevicesDialog mBtDevicesDialog;
 	private Fragment mViewPagerFragment;
-	private RBLProtocol mProtocol = null;
+	private RBLProtocol mProtocol;
+	private boolean isBoxOpen;
 
 	ServiceConnection mConnection = new ServiceConnection() {
 		
@@ -192,7 +193,14 @@ public class MainActivity extends ActionBarActivity implements
 	
 	public void sendPinInfo() {
 		if (mProtocol != null) {
-			mProtocol.digitalWrite(0, 1);
+			if (!isBoxOpen) {
+				isBoxOpen = true;
+				mProtocol.digitalWrite(0, 1);
+			}
+			else {
+				isBoxOpen = false;
+				mProtocol.digitalWrite(0, 0);
+			}
 		}
 	}
 

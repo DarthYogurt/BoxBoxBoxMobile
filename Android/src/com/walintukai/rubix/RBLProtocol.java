@@ -7,7 +7,7 @@ public class RBLProtocol {
 	final String TAG = "RBLProtocol";
 
 	IRBLProtocol mIrblProtocol;
-	ConnectionService service;
+	ConnectionService mService;
 	String address;
 
 	public RBLProtocol(String address) {
@@ -19,7 +19,7 @@ public class RBLProtocol {
 	}
 
 	public void setmIRedBearService(ConnectionService service) {
-		this.service = service;
+		this.mService = service;
 	}
 
 	public void parseData(int[] data) {
@@ -77,8 +77,8 @@ public class RBLProtocol {
 	}
 
 	protected void write(char[] data) {
-		if (service != null) {
-			service.writeValue(address, data);
+		if (mService != null) {
+			mService.writeValue(address, data);
 		}
 	}
 
