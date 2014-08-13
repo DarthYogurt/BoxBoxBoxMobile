@@ -189,6 +189,12 @@ public class MainActivity extends ActionBarActivity implements
 			mService.connectDevice(device.getAddress(), true);
 		}
 	}
+	
+	public void sendPinInfo() {
+		if (mProtocol != null) {
+			mProtocol.digitalWrite(0, 1);
+		}
+	}
 
 	@Override
 	public void onDeviceFound(String deviceAddress, String name, int rssi, int bondState, byte[] scanRecord, ParcelUuid[] uuids) {
@@ -233,6 +239,7 @@ public class MainActivity extends ActionBarActivity implements
 				if (device != null && device.getName() != null && device.getAddress() != null) {
 					mProtocol = new RBLProtocol(device.getAddress());
 					mProtocol.setIRBLProtocol(MainActivity.this);
+					mProtocol.setmIRedBearService(mService);
 					
 					Toast.makeText(MainActivity.this, "Connected to " + device.getName() + " " + 
 							device.getAddress(), Toast.LENGTH_SHORT).show();

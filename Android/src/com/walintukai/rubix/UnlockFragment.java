@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class UnlockFragment extends Fragment implements OnClickListener {
 	
 	private TextView tvCurrentBox;
+	private Button btnUnlock;
 	
 	static UnlockFragment newInstance() {
 		UnlockFragment fragment = new UnlockFragment();
@@ -27,9 +29,12 @@ public class UnlockFragment extends Fragment implements OnClickListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_unlock, container, false);
 		tvCurrentBox = (TextView) view.findViewById(R.id.current_box);
+		btnUnlock = (Button) view.findViewById(R.id.btn_unlock);
+		
+		tvCurrentBox.setText(R.string.select_box);
 		
 		tvCurrentBox.setOnClickListener(this);
-		tvCurrentBox.setText(R.string.select_box);
+		btnUnlock.setOnClickListener(this);
 		
 		return view;
 	}
@@ -39,6 +44,10 @@ public class UnlockFragment extends Fragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.current_box:
 			((MainActivity) getActivity()).enableBluetooth();
+			break;
+			
+		case R.id.btn_unlock:
+			((MainActivity) getActivity()).sendPinInfo();
 			break;
 		}
 	}
