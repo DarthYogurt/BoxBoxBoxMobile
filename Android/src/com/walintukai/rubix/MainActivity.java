@@ -25,7 +25,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity implements ConnectionEventListener, ServiceListener, ViewPagerFragmentListener {
+public class MainActivity extends ActionBarActivity implements 
+		IRBLProtocol, ConnectionEventListener, ServiceListener, ViewPagerFragmentListener {
 	
 	private static final long SCAN_TIME = 4000;
 	private static final int RC_ENABLE_BT = 100;
@@ -35,6 +36,7 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 	private List<Device> mDevices;
 	private BtDevicesDialog mBtDevicesDialog;
 	private Fragment mViewPagerFragment;
+	private RBLProtocol mProtocol = null;
 
 	ServiceConnection mConnection = new ServiceConnection() {
 		
@@ -229,8 +231,12 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 			@Override
 			public void run() {
 				if (device != null && device.getName() != null && device.getAddress() != null) {
+					mProtocol = new RBLProtocol(device.getAddress());
+					mProtocol.setIRBLProtocol(MainActivity.this);
+					
 					Toast.makeText(MainActivity.this, "Connected to " + device.getName() + " " + 
 							device.getAddress(), Toast.LENGTH_SHORT).show();
+					
 					if (mViewPagerFragment != null) {
 						if (mViewPagerFragment.getClass() == UnlockFragment.class) {
 							((UnlockFragment) mViewPagerFragment).setCurrentBoxText(device);
@@ -244,6 +250,43 @@ public class MainActivity extends ActionBarActivity implements ConnectionEventLi
 	@Override
 	public void onSendCurrentFragment(Fragment fragment) {
 		mViewPagerFragment = fragment;
+	}
+
+	@Override
+	public void protocolDidReceiveCustomData(int[] data, int length) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void protocolDidReceiveProtocolVersion(int major, int minor,
+			int bugfix) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void protocolDidReceiveTotalPinCount(int count) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void protocolDidReceivePinCapability(int pin, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void protocolDidReceivePinMode(int pin, int mode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void protocolDidReceivePinData(int pin, int mode, int value) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
